@@ -1,0 +1,23 @@
+# Security, Privacy and Student Safety
+
+The platform is intended for school-age learners. Build privacy and safety into the MVP.
+
+- Collect only the minimum data needed for accounts, learning progress and classroom assignments.
+- Use pseudonymous display names in leaderboards and classroom views.
+- Do not collect phone numbers, home addresses, precise location, personal email or birth date unless a separately reviewed requirement makes it essential.
+- Do not include inventor personal data from the disclosure in source code, seeds, screenshots or demo accounts.
+- Enforce role and class boundaries with Supabase RLS and server-side authorization.
+- Store secrets only in server environment variables.
+- Validate and rate-limit authentication, join-code and submission endpoints.
+- Avoid public student profiles, direct messaging and user-generated public content in the MVP.
+- Provide teacher-controlled assignment and visibility.
+- Use HTTPS in deployment and review data retention/deletion requirements before a real pilot.
+- Add a clear privacy notice and guardian/school consent workflow before onboarding real minors.
+- Do not describe legal compliance as guaranteed; obtain institutional/legal review for the actual deployment jurisdiction.
+
+## Current status — 2026-11-27
+- [x] Synthetic demo users and data only; no inventor personal data in code, seeds or docs.
+- [x] `.env.example` contains placeholders only; no secrets are present in client code.
+- [x] Private student/teacher/lab/results/API routes are excluded from the service-worker cache.
+- [x] Demo login display name is validated with Zod.
+- [ ] Supabase RLS/server authorization, endpoint rate limiting, privacy notice, guardian/school consent workflow and HTTPS deployment review are not implemented yet.
