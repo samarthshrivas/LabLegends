@@ -34,7 +34,11 @@ LabLegends is a browser-first, gamified virtual science laboratory where student
   - One-time banner on the student home and a small interactive Ohm's Law practice run
 - **Local demo persistence**
   - Attempts, XP and badges persist in `localStorage` under `lablegends.demo.v1`
-  - No backend, real accounts or personal student data are required
+  - No backend credentials, real accounts or personal student data are required for demo mode
+- **Supabase foundation**
+  - Postgres schema, RLS policies, column-level write grants and seeded catalog in the linked project
+  - Generated TypeScript database types, browser/server clients and Next.js `proxy.ts` session refresh
+  - Demo mode remains the default; Auth and persistence cutover are pending
 
 ## Current status
 
@@ -45,8 +49,9 @@ LabLegends is a browser-first, gamified virtual science laboratory where student
 | Rule-based rubric, XP and badges | Implemented in pure domain modules |
 | PWA manifest, icons, offline page and safe cache policy | Implemented |
 | First-timer tutorial and interactive 2D stage | Implemented |
-| Supabase Auth, Postgres and RLS | Not implemented |
-| Server-authoritative scoring and immutable XP ledger | Not implemented |
+| Supabase Postgres schema, RLS and catalog seed | Implemented foundation |
+| Supabase Auth and session-aware routing | Not wired to the UI |
+| Server-authoritative scoring and immutable XP ledger | Append-only ledger schema and RLS added; grant RPC pending |
 | Runtime Zod validation for mission definitions | Not implemented; only demo login name is validated |
 | Playwright E2E and formal accessibility audit | Not implemented |
 | Subject-expert review and pilot instrumentation | Not implemented |
@@ -136,7 +141,8 @@ npm start
 - **UI:** Next.js App Router, React 19, TypeScript and Tailwind CSS v4.
 - **Domain logic:** Pure functions in `src/domain/**` for experiment models, rubric evaluation and rewards. React components consume state; they do not own scientific calculations.
 - **Demo persistence:** `src/lib/demo-store.tsx` stores a typed demo shape in `localStorage`.
-- **Validation:** Zod validates the demo login display name. Mission definitions are currently typed, not runtime-validated.
+- **Supabase foundation:** `supabase/migrations/` defines the Postgres schema/RLS; `src/lib/supabase/` contains generated types, browser/server clients and session-refresh helpers. The app still runs in demo mode by default.
+- **Validation:** Zod validates the demo login display name and Supabase environment config. Mission definitions are currently typed, not runtime-validated.
 - **Rendering:** Accessible SVG is the default 2D renderer. Phaser and Three.js are future options, not current dependencies.
 - **PWA:** `public/sw.js` caches only explicitly public shell/content paths. Private routes are excluded from shared caches.
 
@@ -163,7 +169,7 @@ tests/unit/            Vitest unit tests
 - [`docs/UX_AND_DESIGN.md`](docs/UX_AND_DESIGN.md) — visual and accessibility direction
 - [`docs/TEST_PLAN.md`](docs/TEST_PLAN.md) — unit, integration, E2E and quality gates
 - [`docs/SECURITY_PRIVACY.md`](docs/SECURITY_PRIVACY.md) — student safety and privacy constraints
-- [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md) — proposed database schema, not yet implemented
+- [`docs/DATA_MODEL.md`](docs/DATA_MODEL.md) — implemented Supabase schema, RLS and current persistence status
 - [`docs/SOURCE_MAPPING.md`](docs/SOURCE_MAPPING.md) — mapping to the invention disclosure and interpretation notes
 - [`docs/STATUS.md`](docs/STATUS.md) — current verified state
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — implemented and pending work
@@ -175,19 +181,20 @@ Last verified 2026-11-27:
 ```text
 npm run lint        clean
 npm run typecheck   clean
-npm run test        6 files, 28 tests passed
+npm run test        7 files, 32 tests passed
 npm run build       successful; 16 routes generated
 ```
 
-Route smoke tests returned HTTP 200 for the main student, teacher, tutorial, offline, manifest and service-worker routes. Browser install prompt, Playwright E2E, formal accessibility audit and low-end device performance pass are not yet verified.
+Route smoke tests returned HTTP 200 for the main student, teacher, tutorial, offline, manifest and service-worker routes. Supabase migrations were applied to the linked project; the seeded catalog has 3 missions and 5 badges. Browser install prompt, Playwright E2E, formal accessibility audit and low-end device performance pass are not yet verified.
 
 ## Security and privacy
 
 - Demo users, classes and attempts are synthetic; no real student information is used.
 - No inventor personal or contact details are included in code, seeds or documentation.
-- Secrets are not placed in client code; `.env.example` contains placeholders only.
+- Secrets are not placed in client code; `.env.example` contains placeholders only. Only the Supabase publishable key is intended for browser use.
+- Supabase RLS and column-level write grants are enabled on the implemented schema; Auth wiring and server-side reward grants are still pending.
 - Private routes are excluded from the service-worker cache.
-- Real student use would require backend authorization, RLS, privacy notice, guardian/school consent and institutional review. This demo does not claim legal compliance.
+- Real student use would require completed Auth/authorization wiring, privacy notice, guardian/school consent and institutional review. This demo does not claim legal compliance.
 
 ## Contributing
 

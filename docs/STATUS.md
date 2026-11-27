@@ -11,26 +11,27 @@
 - Experiment stage is now interactive: clickable `+` hotspots adjust voltage, resistance, final volume, light and CO₂; richer CSS/SMIL animations include flowing charge, liquid waves/droplets, pulsing components and leaf motion, all respecting reduced-motion preferences.
 - WebGL capability detection added with an honest 2D fallback chip; 2D remains the default rendering path.
 - Zod is used for demo login display-name validation; mission definitions are typed but not runtime-validated yet.
-- Verification run on 2026-11-27: `npm run lint` clean, `npm run typecheck` clean, `npm run test -- --run` 28/28 passing, `npm run build` successful with 16 routes, and all primary plus new routes returned HTTP 200 from the dev server.
+- Supabase foundation is implemented: initial Postgres schema, RLS policies, column-level write grants, seeded mission/badge catalog, generated TypeScript types, browser/server clients, root `proxy.ts` session refresh and env template. The UI still defaults to demo mode.
+- Verification run on 2026-11-27: `npm run lint` clean, `npm run typecheck` clean, `npm run test -- --run` 32/32 passing, `npm run build` successful with 16 routes, and all primary plus new routes returned HTTP 200 from the dev server. Supabase advisors report only intentional authenticated `SECURITY DEFINER` helpers and unused-index info for the new schema.
 
 ## Decisions
 - Browser-first PWA direction retained; 2D-first MVP with SVG apparatus and charts, no 3D dependency added yet. The service worker registers only in production builds to avoid stale caches during development.
 - Science models and evaluation remain deterministic, testable and separate from UI components.
 - Started with the Physics vertical slice, then added Chemistry and Biology missions using the same lab shell.
 - Biology photosynthesis model is explicitly labelled conceptual, uses relative units and is gated as `pending-subject-review`; it must not be used for assessed scoring until reviewed.
-- Synthetic demo data only; Supabase/Postgres, RLS and server-side reward calculation remain future work.
+- Synthetic demo data only; the Supabase/Postgres/RLS foundation is implemented, but Auth wiring, server-side scoring/reward grants and class-join RPCs remain future work.
 - Hints never reduce XP; retries are always allowed; no speed bonus exists anywhere in the reward logic.
-- Navigation is path-aware in the demo shell; role-aware route guards and server authorization are not implemented yet.
+- Navigation is path-aware in the demo shell; Supabase RLS policies exist, but role-aware route guards and Auth wiring are not implemented yet.
 
 ## Known gaps
-- No Supabase Auth/Postgres/RLS, server-side scoring, immutable XP ledger or idempotent reward grant yet.
+- Supabase tables/RLS/seed exist, but Auth screens, server-side scoring, XP grants, class-join RPC and persistence cutover are not wired yet.
 - No runtime Zod validation for mission definitions or experiment submissions; only the demo login name is validated.
 - No route guards, teacher assignment mutations or mission unlock/gating yet.
 - No Playwright integration/E2E tests, formal accessibility audit, screen-reader pass or low-end device performance pass yet.
 - Biology model still pending subject review; no pilot metrics are instrumented and no learning-outcome claims are made.
 
 ## Open decisions
-- Confirm whether Supabase is the preferred backend or an existing backend must be retained.
+- Supabase is the selected backend; confirm the first Auth/persistence cutover plan and class-join flow.
 - Confirm exact target grade bands for the first pilot.
 - Obtain subject-expert review and references for each released simulation, especially the biology model.
 - Decide whether 3D is necessary for any MVP mission after testing the 2D experience.
@@ -49,3 +50,5 @@
 - Added interactive hotspots and richer reduced-motion-aware animations to all three experiment stages.
 - Added WebGL capability detection with a 2D fallback status chip.
 - Audited all Markdown files and reconciled checkboxes/status notes with the implemented code.
+- Added the Supabase project foundation: initial schema/RLS migration, catalog seed, generated types, SSR clients/proxy, env template and config tests.
+- Applied migrations to the linked Supabase project; verified seeded catalog, anonymous published-catalog reads and advisor state.
