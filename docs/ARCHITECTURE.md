@@ -160,6 +160,7 @@ Rules:
 - UI is Next.js App Router + Tailwind v4; experiment scenes are accessible SVG, not Phaser/Three.js yet.
 - WebGL capability detection lives in `src/lib/use-webgl-support.ts` and is surfaced as a 2D fallback chip; no 3D scenes are loaded.
 - Domain logic lives in `src/domain/**` and is pure. Mission definitions are typed in `src/data/missions.ts` but are not runtime-validated with Zod yet.
-- Demo persistence uses `localStorage` via `src/lib/demo-store.tsx`; Supabase/Postgres/RLS, server actions and server-side scoring are not implemented.
+- Demo persistence uses `localStorage` via `src/lib/demo-store.tsx`; the Supabase Postgres schema/RLS, generated types, browser/server clients and root `proxy.ts` session refresh now exist, but Auth wiring, server actions and server-side scoring are not implemented.
+- Supabase migrations live in `supabase/migrations/`; published mission/badge catalog data is seeded from `supabase/seed.sql`. The app still defaults to demo mode until Auth and persistence adapters are added.
 - The PWA service worker caches only the public shell and explicitly public mission content; private routes are excluded.
 - The suggested source layout above is aspirational; the actual repo uses route groups `(auth)`, `(student)`, `(teacher)` and `(lab)`, plus `src/components/pwa`.

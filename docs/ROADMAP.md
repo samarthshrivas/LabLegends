@@ -29,7 +29,7 @@
 - [x] Retry/hints and in-app mission progression.
 - [ ] Pure mission-state module with transition tests.
 - [x] XP calculation and badge awards in demo store.
-- [ ] Immutable server-side XP ledger and idempotent reward grant.
+- [ ] Immutable server-side XP ledger and idempotent reward grant (append-only schema exists; grant RPC pending).
 - [ ] Mission unlock/gating to the next mission.
 
 **Exit:** a student can complete the entire Physics mission and see persisted results (or clearly labelled demo persistence). ✅ Demo persistence via `localStorage`.
@@ -48,13 +48,15 @@
 - [ ] Teacher assignment mutations.
 - [x] Completion and misconception analytics.
 - [x] CSV report export.
-- [ ] Role-based access and RLS tests.
+- [ ] Role-based access and RLS tests (policies implemented; automated tests pending).
 
 **Exit:** teacher can assign a mission and inspect only authorized class analytics. ⚠️ Demo analytics complete; assignment mutations, authorization/RLS still require backend work.
 
 ## Phase 5 — Persistence, PWA and resilience
-- [ ] Supabase Auth and migrations.
-- [ ] RLS policies and server-side reward calculation.
+- [x] Supabase project linked; initial schema, RLS, seed and generated TypeScript types added.
+- [ ] Supabase Auth screens and session-aware routing.
+- [x] RLS policies, column-level write grants and append-only XP ledger schema.
+- [ ] Server-side reward calculation and idempotent grant RPC.
 - [x] PWA manifest, icons and app-shell offline support (production service worker, strict public cache allowlist; browser install prompt not yet verified).
 - [x] Offline indicator and cached-content page.
 - [ ] Background sync/retry queue for authenticated actions.
@@ -80,7 +82,8 @@ Update `STATUS.md` after each implementation session. Do not mark a phase comple
 ## Verification record — 2026-11-27
 - `npm run lint` — clean.
 - `npm run typecheck` — clean.
-- `npm run test -- --run` — 6 files, 28 tests passed.
+- `npm run test -- --run` — 7 files, 32 tests passed.
 - `npm run build` — successful; 16 routes generated, including `/tutorial`, `/offline`, `/manifest.webmanifest` and `/icon.svg`.
 - Dev server smoke test — `/`, `/tutorial`, `/offline`, `/manifest.webmanifest`, `/sw.js`, `/missions`, `/student`, `/lab/satellite-went-dark` all returned HTTP 200; earlier smoke test covered login, briefing, results, progress and teacher routes.
+- Supabase — linked project migrations applied; 3 missions and 5 badges seeded; anonymous reads of published catalog verified; advisors show only intentional authenticated `SECURITY DEFINER` helpers and unused-index info for the new schema.
 - Documentation audit — all Markdown files reviewed; checkboxes reconciled with implemented code and status notes added to planning docs.

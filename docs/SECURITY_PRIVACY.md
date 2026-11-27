@@ -19,5 +19,8 @@ The platform is intended for school-age learners. Build privacy and safety into 
 - [x] Synthetic demo users and data only; no inventor personal data in code, seeds or docs.
 - [x] `.env.example` contains placeholders only; no secrets are present in client code.
 - [x] Private student/teacher/lab/results/API routes are excluded from the service-worker cache.
-- [x] Demo login display name is validated with Zod.
-- [ ] Supabase RLS/server authorization, endpoint rate limiting, privacy notice, guardian/school consent workflow and HTTPS deployment review are not implemented yet.
+- [x] Demo login display name and Supabase environment config are validated with Zod.
+- [x] Supabase RLS, column-level write grants and append-only XP ledger schema are implemented.
+- [x] Browser code uses only the Supabase publishable key; no service-role secret is shipped to the client.
+- [ ] Auth screens/session-aware routing, endpoint rate limiting, class-join RPC, privacy notice, guardian/school consent workflow and HTTPS deployment review are not implemented yet.
+- [ ] Automated RLS authorization tests and a formal security review are still pending.
