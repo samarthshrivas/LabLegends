@@ -13,6 +13,7 @@
 - Zod is used for demo login display-name validation; mission definitions are typed but not runtime-validated yet.
 - Supabase foundation is implemented: initial Postgres schema, RLS policies, column-level write grants, seeded mission/badge catalog, generated TypeScript types, browser/server clients, root `proxy.ts` session refresh and env template. The UI still defaults to demo mode.
 - Verification run on 2026-11-27: `npm run lint` clean, `npm run typecheck` clean, `npm run test -- --run` 32/32 passing, `npm run build` successful with 16 routes, and all primary plus new routes returned HTTP 200 from the dev server. Supabase advisors report only intentional authenticated `SECURITY DEFINER` helpers and unused-index info for the new schema.
+- Deployed test environment: `https://lablegends-opencode.vercel.app` (new Vercel project, Next.js preset, Vercel Authentication enabled). Production smoke checks returned HTTP 200 for `/`, `/missions`, `/student`, `/tutorial`, `/offline`, `/manifest.webmanifest` and `/sw.js`.
 
 ## Decisions
 - Browser-first PWA direction retained; 2D-first MVP with SVG apparatus and charts, no 3D dependency added yet. The service worker registers only in production builds to avoid stale caches during development.
@@ -52,3 +53,4 @@
 - Audited all Markdown files and reconciled checkboxes/status notes with the implemented code.
 - Added the Supabase project foundation: initial schema/RLS migration, catalog seed, generated types, SSR clients/proxy, env template and config tests.
 - Applied migrations to the linked Supabase project; verified seeded catalog, anonymous published-catalog reads and advisor state.
+- Created a dedicated Vercel project `lablegends-opencode`, added public env vars only, set the Next.js framework preset after an initial `Other`-preset 404 deployment, redeployed successfully and smoke-tested production routes.

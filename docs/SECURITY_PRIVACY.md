@@ -22,5 +22,6 @@ The platform is intended for school-age learners. Build privacy and safety into 
 - [x] Demo login display name and Supabase environment config are validated with Zod.
 - [x] Supabase RLS, column-level write grants and append-only XP ledger schema are implemented.
 - [x] Browser code uses only the Supabase publishable key; no service-role secret is shipped to the client.
-- [ ] Auth screens/session-aware routing, endpoint rate limiting, class-join RPC, privacy notice, guardian/school consent workflow and HTTPS deployment review are not implemented yet.
+- [x] Deployed test environment uses HTTPS on a dedicated Vercel project with Vercel Authentication enabled; no other Vercel projects were touched.
+- [ ] Auth screens/session-aware routing, endpoint rate limiting, class-join RPC, privacy notice, guardian/school consent workflow and formal HTTPS deployment review are not implemented yet.
 - [ ] Automated RLS authorization tests and a formal security review are still pending.

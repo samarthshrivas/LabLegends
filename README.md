@@ -185,7 +185,7 @@ npm run test        7 files, 32 tests passed
 npm run build       successful; 16 routes generated
 ```
 
-Route smoke tests returned HTTP 200 for the main student, teacher, tutorial, offline, manifest and service-worker routes. Supabase migrations were applied to the linked project; the seeded catalog has 3 missions and 5 badges. Browser install prompt, Playwright E2E, formal accessibility audit and low-end device performance pass are not yet verified.
+Route smoke tests returned HTTP 200 for the main student, teacher, tutorial, offline, manifest and service-worker routes. Supabase migrations were applied to the linked project; the seeded catalog has 3 missions and 5 badges. A deployed test environment is available at `https://lablegends-opencode.vercel.app` with Vercel Authentication enabled; production smoke checks returned HTTP 200 for `/`, `/missions`, `/student`, `/tutorial`, `/offline`, `/manifest.webmanifest` and `/sw.js`. Browser install prompt, Playwright E2E, formal accessibility audit and low-end device performance pass are not yet verified.
 
 ## Security and privacy
 

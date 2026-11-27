@@ -86,4 +86,5 @@ Update `STATUS.md` after each implementation session. Do not mark a phase comple
 - `npm run build` — successful; 16 routes generated, including `/tutorial`, `/offline`, `/manifest.webmanifest` and `/icon.svg`.
 - Dev server smoke test — `/`, `/tutorial`, `/offline`, `/manifest.webmanifest`, `/sw.js`, `/missions`, `/student`, `/lab/satellite-went-dark` all returned HTTP 200; earlier smoke test covered login, briefing, results, progress and teacher routes.
 - Supabase — linked project migrations applied; 3 missions and 5 badges seeded; anonymous reads of published catalog verified; advisors show only intentional authenticated `SECURITY DEFINER` helpers and unused-index info for the new schema.
+- Vercel — new project `lablegends-opencode` deployed to `https://lablegends-opencode.vercel.app` with the Next.js preset; production smoke checks returned HTTP 200 for all primary routes. Deployment Protection (Vercel Authentication) is enabled.
 - Documentation audit — all Markdown files reviewed; checkboxes reconciled with implemented code and status notes added to planning docs.
