@@ -207,4 +207,6 @@ Not applicable yet. The current demo has no public API; all persistence is local
 
 ## License
 
-License not yet specified. No `LICENSE` file is included, so treat the code as unlicensed/all rights reserved until a license is chosen and added.
+Proprietary — all rights reserved. See [`LICENSE`](LICENSE).
+
+No permission is granted to copy, modify, distribute, sublicense, or reuse this repository or its contents without written permission from the copyright holder. Viewing or cloning the public repository does not grant a license.

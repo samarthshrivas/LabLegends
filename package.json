@@ -2,6 +2,7 @@
   "name": "lablegends",
   "version": "0.1.0",
   "private": true,
+  "license": "UNLICENSED",
   "description": "LabLegends — a gamified virtual science laboratory where students learn through hypothesis-driven mystery missions.",
   "scripts": {
     "dev": "next dev",
